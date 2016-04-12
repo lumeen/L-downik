@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		thread.start();
 	}
 	/**
-	 * Funkcja ustawiaj¹ca g³ówn¹ pêtlê gry
+	 * Funkcja ustawiaj¹ca g³ówn¹ pêtlê gry.
 	 */
 	@Override
 	public void run() {
