@@ -1,17 +1,18 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Board extends GameState {
 	/**
 	 * Obiekt gracza
 	 */
-	private Player player; 
+	private static Player player; 
 	/**
-	 * Tablica obiektów platform
+	 * Tablica obiektï¿½w platform
 	 */
 	public Platform[] platforms;
 	/**
-	 * Tablica obiektów ska³
+	 * Tablica obiektï¿½w skaï¿½
 	 */
 	public Rock [] rocks;
 	/**
@@ -20,7 +21,7 @@ public class Board extends GameState {
  	private Map map;
 
  	/**
- 	 * Konstruktor klasy Board - przys³oniêcie konstruktora StateMenager
+ 	 * Konstruktor klasy Board - przysï¿½oniï¿½cie konstruktora StateMenager
  	 */
 	public Board(StateMenager menager) {
 		super(menager);
@@ -30,45 +31,54 @@ public class Board extends GameState {
 	@Override
 	public void init() {
 
-		player = new Player(300, 30);
+		setPlayer(new Player(300, 30));
 		map = new Map("/maps/map1.map");
 		
 
 	}
 	/**
-	 * Funkcja aktualizuj¹ca logikê gry
+	 * Funkcja aktualizujï¿½ca logikï¿½ gry
 	 */
 	@Override
 	public void tick() {
 		StateMenager s=new StateMenager();
-		player.tick(map.getBlocks());
+		getPlayer().tick(map.getBlocks());
 	}
 	/**
-	 * Funkcja odpowiadaj¹ca za rysowanie elementów
+	 * Funkcja odpowiadajï¿½ca za rysowanie elementï¿½w
 	 */
 	@Override
 	public void draw(Graphics g) {
 
-		player.draw(g);
+		getPlayer().draw(g);
 		map.draw(g);
 		
 		
 	}
 	/**
-	 * Funkcja odpowiadaj¹ca za naciœniecie przycisku 
+	 * Funkcja odpowiadajï¿½ca za naciï¿½niecie przycisku 
 	 */
 	@Override
 	public void keyPressed(int k) {
 
-		player.keyPressed(k);
+		getPlayer().keyPressed(k);
 	}
 	/**
-	 * Funkcja odpowiadaj¹ca za puszczenie przycisku 
+	 * Funkcja odpowiadajï¿½ca za puszczenie przycisku 
 	 */
 	@Override
 	public void keyReleased(int k) {
-		player.keyRealassed(k);
+		getPlayer().keyRealassed(k);
 
 	}
+
+	public static Player getPlayer() {
+		return player;
+	}
+
+	public static void setPlayer(Player player) {
+		Board.player = player;
+	}
+
 
 }

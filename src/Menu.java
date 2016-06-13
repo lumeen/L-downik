@@ -7,15 +7,14 @@ import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javafx.event.ActionEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 /**
- * Klasa wyœwietlaj¹ca menu gry
+ * Klasa wyï¿½wietlajï¿½ca menu gry
  */
 public class Menu extends GameState {
 	/**
@@ -25,28 +24,29 @@ public class Menu extends GameState {
 	/**
 	 * Przycisk do potrwierdzenia nicku
 	 */
-	 private JButton loginButton;
+	private JButton loginButton;
 	/**
 	 * Tekst nicku gracza
 	 */
 	public static JTextField userText;
 	/**
-	 *Ramka okna dialogowego nicku
+	 * Ramka okna dialogowego nicku
 	 */
 	JFrame nickFrame;
+
 	/**
 	 * KOnstruktor klasy Menu
 	 */
 	public Menu(StateMenager menager) {
 		super(menager);
 	}
+
 	/**
 	 * Tablica z funkcjami menu
 	 */
-	private String[] options = { "Nowa gra", "Najlepsze wynik", "Gra sieciowa",
-			"Wyjœice" };
+	private String[] options = { "Nowa gra", "Najlepsze wynik", "Gra sieciowa", "Wyjï¿½ice" };
 	/**
-	 * Obecny wybór opcji z menu
+	 * Obecny wybï¿½r opcji z menu
 	 */
 	static int currentChoice = 0;
 
@@ -57,18 +57,21 @@ public class Menu extends GameState {
 	public void tick() {
 
 	}
+
 	/**
-	 * Funkcja rysuj¹ca menu na ekranie
-	 * @param g - graphic
+	 * Funkcja rysujï¿½ca menu na ekranie
+	 * 
+	 * @param g
+	 *            - graphic
 	 */
 	public void draw(Graphics g) {
-		g.setColor(new Color(23,20,71));
+		g.setColor(new Color(23, 20, 71));
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.WIDTH);
 
 		for (int i = 0; i < options.length; i++) {
 			if (i == currentChoice) {
 
-				g.setColor(new Color(10,71,0));
+				g.setColor(new Color(10, 71, 0));
 
 			} else {
 
@@ -79,9 +82,12 @@ public class Menu extends GameState {
 
 		}
 	}
+
 	/**
-	 * Funkcja poruszania siê po menu za pomoc¹ przycisków
-	 * @param k - int reprezentuj¹cy wybrany przycisk
+	 * Funkcja poruszania siï¿½ po menu za pomocï¿½ przyciskï¿½w
+	 * 
+	 * @param k
+	 *            - int reprezentujï¿½cy wybrany przycisk
 	 */
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_DOWN) {
@@ -114,8 +120,9 @@ public class Menu extends GameState {
 	public void keyReleased(int k) {
 
 	}
+
 	/**
-	 * Funkcja wyœwietlaj¹ca panel do wpisania nicku
+	 * Funkcja wyï¿½wietlajï¿½ca panel do wpisania nicku
 	 */
 	private void setNickPanel() {
 
@@ -141,13 +148,13 @@ public class Menu extends GameState {
 	}
 
 	/**
-	 * Funkcja umiejscowuj¹ca komponenty na ekrenie
+	 * Funkcja umiejscowujï¿½ca komponenty na ekrenie
 	 */
 	private void placeComponents(JPanel panel) {
 
 		panel.setLayout(null);
 
-		userLabel = new JLabel("Twój nick:");
+		userLabel = new JLabel("Twï¿½j nick:");
 		userLabel.setBounds(10, 10, 80, 25);
 		panel.add(userLabel);
 
@@ -160,8 +167,9 @@ public class Menu extends GameState {
 		panel.add(loginButton);
 
 	}
+
 	/**
-	 * Funkcja wyœwietlaj¹ca mapê gry po zaakceptowaniu nicku
+	 * Funkcja wyï¿½wietlajï¿½ca mapï¿½ gry po zaakceptowaniu nicku
 	 */
 	private void okClick() {
 
@@ -173,7 +181,6 @@ public class Menu extends GameState {
 				App.getFrame().setVisible(true);
 				nickFrame.setVisible(false);
 				menager.states.push(new Board(menager));
-				
 
 			}
 		});

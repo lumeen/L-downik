@@ -1,16 +1,15 @@
-import com.sun.javafx.scene.paint.GradientUtils.Point;
 
 
 /**
- * Klasa okreœlaj¹ca kolizje gracza z obiektami na mapie.
+ * Klasa okreï¿½lajï¿½ca kolizje gracza z obiektami na mapie.
  */
 
 
 public class Collision {
 	
 	/**
-	 * Metoda okreœlaj¹ca czy zachodzi kolizja miêdzy graczem a klockiem.
-	 * @param p - po³o¿enie gracza (Point)
+	 * Metoda okreï¿½lajï¿½ca czy zachodzi kolizja miï¿½dzy graczem a klockiem.
+	 * @param p - poï¿½oï¿½enie gracza (Point)
 	 * @param pl - obiekt platformy
 	 * @return kolizja zachodzi (true) lub nie (false)
 	 */

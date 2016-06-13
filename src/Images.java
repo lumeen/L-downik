@@ -4,21 +4,22 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Klasa definiuj¹ca zasoby graficzne.
+ * Klasa definiujï¿½ca zasoby graficzne.
  */
 public class Images {
-	/** Tablica z obrazami bloków */
+	/** Tablica z obrazami blokï¿½w */
 	public static BufferedImage[] blocks;
-	/** Tablica z obrazem t³a */
+	/** Tablica z obrazem tï¿½a */
 	public static BufferedImage[] background;
 	/** Tablica z obrazami gracza (rakiety) */
 	public static BufferedImage[] player;
-	/** Tablica z obrazami ska³ */
+	/** Tablica z obrazami skaï¿½ */
 	public static BufferedImage[] rock;
+	public static BufferedImage[] shapes;
 	
 	/**
-	 * Kontruktor klasy zasobów graficznych.
-	 * Wczytuje obrazki dla kbloków t³a, ska³, gracza
+	 * Kontruktor klasy zasobï¿½w graficznych.
+	 * Wczytuje obrazki dla kblokï¿½w tï¿½a, skaï¿½, gracza
 	 */
 public Images(){
 	
@@ -26,12 +27,14 @@ public Images(){
 	background= new BufferedImage[1];
 	player= new BufferedImage[1];
 	rock= new BufferedImage[1];
+	shapes= new BufferedImage[1];
 	
 	try {
 		blocks[0]= ImageIO.read(getClass().getResourceAsStream("/Images/Block.jpg"));
 		background[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Background.jpg"));
 		player[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Rocket2.jpg"));
 		rock[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Black.png"));
+		shapes[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Block.jpg"));
 	
 		
 	} catch (IOException e) {

@@ -1,19 +1,21 @@
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Klasa reprezentuj¹ca mapê gry - jeden poziom
+ * Klasa reprezentujï¿½ca mapï¿½ gry - jeden poziom
  */
 public class Map {
 	/**
-	 * Œcie¿ka do pliku z parametrami wybranej mapy
+	 * ï¿½cieï¿½ka do pliku z parametrami wybranej mapy
 	 */
 	private String path;
 	/**
-	 * Szerokoœæ i wysokoœæ mapy (liczba bloków)
+	 * Szerokoï¿½ï¿½ i wysokoï¿½ï¿½ mapy (liczba blokï¿½w)
 	 */
 	private int width, hight;
 	/**
@@ -21,12 +23,12 @@ public class Map {
 	 */
 	private Platform[][] blocks;
 	/**
-	 * Tablica ska³
+	 * Tablica skaï¿½
 	 */
 	private Rock[][] rocks;
 	/**
-	 *Konstruktor klasy Map - wywo³anie funkcji wczytywania danych mapy z pliku
-	 *@param filePath - œcie¿ka do pliku
+	 *Konstruktor klasy Map - wywoï¿½anie funkcji wczytywania danych mapy z pliku
+	 *@param filePath - ï¿½cieï¿½ka do pliku
 	 */
 	public Map(String filePath) {
 
@@ -50,10 +52,30 @@ public class Map {
 			}
 
 		}
-
+		
+		int[] x={0,100,150,230,300,375,475,500,600,650,750,800,0};
+		int[] y= {500,400,460,370,420,500,600,390,450,410,390,500,500};
+		Polygon d= new Polygon(x,y,x.length);
+		g.setColor(Color.BLACK);
+		
+		g.drawPolygon(d);
+	g.setColor(Color.BLACK);
+		g.fillPolygon(d);
+		
+		if(d.getBounds().contains(Board.getPlayer().getX(),Board.getPlayer().getY(),40,40)){
+			
+			System.out.println("LOooooooooooooooooooool");
+			
+		}
+			
+		
+	
+		
 	}
+	
+
 	/**
-	 * Funkcja wczytuj¹ca dane na temat mapy z pliku
+	 * Funkcja wczytujï¿½ca dane na temat mapy z pliku
 	 */
 	public void loadMap() {
 
