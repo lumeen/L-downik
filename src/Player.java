@@ -41,7 +41,7 @@ public class Player {
 	/**
 	 * Nick gracza pobierany z okienka dialogowego
 	 */
-	public static String nick ;
+	public static String nick;
 	/**
 	 * Sprawdzanie czy obiekt gracza jest w kolizji z platfom� (czy si� dotkaj�)
 	 */
@@ -68,9 +68,11 @@ public class Player {
 
 		this.x = x;
 		this.y = y;
-		this.nick=nick;
-		this.points=points;
-		
+		this.nick = nick;
+		this.points = points;
+		  
+		 
+
 	}
 
 	/**
@@ -82,8 +84,9 @@ public class Player {
 	 */
 
 	public void tick(Platform[][] platforms) {
-
-		System.out.println(100 * currentFollowSpeed);
+		
+		//System.out.println(100 * currentFollowSpeed);
+		System.out.println(	GameState.menager.states.size());
 		for (int i = 0; i < platforms.length; i++) {
 			for (int j = 0; j < platforms[0].length; j++) {
 
@@ -93,14 +96,30 @@ public class Player {
 
 					{
 
+						
+						
 						follow = false;
 						bottomCollision = true;
-						if(currentFollowSpeed<100){
-						Board.getPlayer().points=+100;
-						System.out.println(Board.getPlayer().points);}
+					
+						//GameState.menager.states.push(new Defeat(GameState.menager));
+						
+						
+						
+						
+						
+						
+						
+
+							
+							
+							
+					
 					} else if (!bottomCollision) {
 						follow = true;
+						
+						
 					}
+					  
 
 					if (Collision.contain(new Point((int) x + width, (int) y), platforms[i][j])
 							|| Collision.contain(new Point((int) x, (int) y), platforms[i][j]))
@@ -113,7 +132,12 @@ public class Player {
 				}
 
 			}
+
+		
+			
+
 		}
+	
 
 		bottomCollision = false;
 
@@ -126,11 +150,11 @@ public class Player {
 		}
 
 		if (right)
-			x++;
+			x=x+0.5;
 
 		if (left)
 
-			x--;
+			x=x-0.5;
 
 		if (follow) {
 			y += currentFollowSpeed;
@@ -153,6 +177,9 @@ public class Player {
 		}
 
 	}
+	
+
+
 
 	/**
 	 * Funkcja rysuj�ca gracza
@@ -165,6 +192,7 @@ public class Player {
 		g.drawImage(Images.background[0], 0, 0, 800, 600, null);
 		g.setColor(Color.BLACK);
 		g.drawImage(Images.player[0], (int) x, (int) y, width, height, null);
+	
 
 	}
 
@@ -236,7 +264,6 @@ public class Player {
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
 
 	public static String getNick() {
 		return nick;
@@ -253,6 +280,5 @@ public class Player {
 	public static void setMaxfollowSpeed(double maxfollowSpeed) {
 		Player.maxfollowSpeed = maxfollowSpeed;
 	}
-	
 
 }

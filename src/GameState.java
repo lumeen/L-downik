@@ -3,12 +3,12 @@ import java.awt.Graphics;
 
 public abstract class GameState {
 	/**
-	 * Menadzêr zarz¹dzania tym co jest aktualnie wyœiwetlane
+	 * Menadzï¿½r zarzï¿½dzania tym co jest aktualnie wyï¿½iwetlane
 	 */
-public StateMenager menager;
+public static StateMenager menager;
 /**
  * KOnstruktor klasy GameState
- * @param menager - menager zarz¹dzaj¹cy tym co jest wyœwietlane
+ * @param menager - menager zarzï¿½dzajï¿½cy tym co jest wyï¿½wietlane
  */
 	public GameState(StateMenager menager){
 		
@@ -17,20 +17,20 @@ public StateMenager menager;
 	}
 public abstract void init();
 /**
- * Funkcja updatuj¹ca logikê gry
+ * Funkcja updatujï¿½ca logikï¿½ gry
  */
 public abstract void tick();
 /**
- * Funkcja rysuj¹ca elementy 
+ * Funkcja rysujï¿½ca elementy 
  * @param g -grphics 
  */
 public abstract void draw(Graphics g) ;
 /**
- * Funkcja odpowiadaj¹ca za naciœniecie przycisku 
+ * Funkcja odpowiadajï¿½ca za naciï¿½niecie przycisku 
  */
 public abstract void keyPressed(int k);
 /**
- * Funkcja odpowiadaj¹ca z apuszczenie przycisku
+ * Funkcja odpowiadajï¿½ca z apuszczenie przycisku
  */
 public abstract void keyReleased(int k);
 

@@ -76,8 +76,9 @@ public	int[] yPointsTabNum;
 
 		if (Collision.collisionWithMountain(d, Board.getPlayer().getX(), Board.getPlayer().getY())) {
 
-			System.out.println("looooooooooooooll");
-
+			GameState.menager.states.push(new Defeat(GameState.menager));
+			
+		
 		}
 
 	}

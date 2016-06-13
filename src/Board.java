@@ -43,7 +43,7 @@ public class Board extends GameState {
 	 */
 	@Override
 	public void tick() {
-		StateMenager s=new StateMenager();
+		
 		getPlayer().tick(map.getBlocks());
 	}
 	/**
