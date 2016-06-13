@@ -23,6 +23,8 @@ public class Board extends GameState {
  	/**
  	 * Konstruktor klasy Board - przys�oni�cie konstruktora StateMenager
  	 */
+ 	
+ 	public static int lvl=1;
 	public Board(StateMenager menager) {
 		super(menager);
 
@@ -33,8 +35,8 @@ public class Board extends GameState {
 
 		player=new Player(30,0,Menu.name,0);	
 		setPlayer(player);
-		map = new Map("/maps/map1.map");
-		System.out.println(player.nick);
+		map = new Map("/maps/map" + lvl+ ".map");
+		System.out.println(lvl);
 		
 
 	}

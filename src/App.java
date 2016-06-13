@@ -17,7 +17,7 @@ public class App {
 		/**
 		 * Nowa ramka
 		 */
-		frame= new JFrame("L¹downik"); 
+		frame= new JFrame("LÄ…downik"); 
 		
 		Config.readConfig();
 		/**
@@ -26,7 +26,7 @@ public class App {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		
 		/**
-		 *  Ramka nie mo¿e mo¿e zmieniaæ rozmiaru
+		 *  Ramka nie moï¿½e moï¿½e zmieniaï¿½ rozmiaru
 		 */
 		frame.setResizable(false); 
 		/**
@@ -39,7 +39,7 @@ public class App {
 		frame.add(new GamePanel(), BorderLayout.CENTER); 
 		frame.pack();
 		/**
-		 *  Ustawienie widocznoœæi
+		 *  Ustawienie widocznoï¿½ï¿½i
 		 */
 		frame.setVisible(true);
 	

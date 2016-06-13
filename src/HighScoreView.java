@@ -2,21 +2,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Defeat extends GameState {
+public class HighScoreView extends GameState {
 
-	public Defeat(StateMenager menager) {
+	public HighScoreView(StateMenager menager) {
 		super(menager);
-	
-		
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
-		HighscoreManager hm = new HighscoreManager();
-		hm.addScore(Board.getPlayer().getNick(), Board.getPlayer().getPoints());
 		
 	}
 
@@ -24,19 +19,17 @@ public class Defeat extends GameState {
 	public void tick() {
 		// TODO Auto-generated method stub
 		
-		
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+        HighscoreManager hm = new HighscoreManager();
+
 		g.setColor(new Color(23, 20, 71));
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HIGHTH);
 		g.setColor(new Color(10, 71, 0));
-		g.setFont(new Font("Arial",Font.PLAIN,60));
-		g.drawString("Porażka",GamePanel.WIDTH/2-170, 150);
-		g.drawString("Twój wynik to " + Board.getPlayer().getPoints() + " pkt",GamePanel.WIDTH/2-170, 200);
-		
+		g.setFont(new Font("Arial",Font.PLAIN,20));
+		g.drawString(hm.getHighscoreString(), GamePanel.WIDTH/2-170, 200);
 		
 		
 		
@@ -53,7 +46,6 @@ public class Defeat extends GameState {
 		// TODO Auto-generated method stub
 		
 	}
-	
 	
 	
 

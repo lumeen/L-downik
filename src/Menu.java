@@ -109,6 +109,7 @@ public class Menu extends GameState {
 				setNickPanel();
 
 			} else if (currentChoice == 1) {
+				GameState.menager.states.push(new HighScoreView(GameState.menager));
 			} else if (currentChoice == 2) {
 			} else if (currentChoice == 3) {
 				System.exit(0);

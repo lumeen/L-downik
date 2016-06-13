@@ -88,7 +88,7 @@ public	int[] yPointsTabNum;
 	 * Funkcja wczytuj�ca dane na temat mapy z pliku
 	 */
 	public void loadMap() {
-		String fileName = "1.txt";
+		String fileName = Board.lvl+ ".txt";
 
 		InputStream is = this.getClass().getResourceAsStream(path);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));

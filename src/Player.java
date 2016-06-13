@@ -86,7 +86,7 @@ public class Player {
 	public void tick(Platform[][] platforms) {
 		
 		//System.out.println(100 * currentFollowSpeed);
-		System.out.println(	GameState.menager.states.size());
+	
 		for (int i = 0; i < platforms.length; i++) {
 			for (int j = 0; j < platforms[0].length; j++) {
 
@@ -100,8 +100,11 @@ public class Player {
 						
 						follow = false;
 						bottomCollision = true;
-					
-						//GameState.menager.states.push(new Defeat(GameState.menager));
+						Board.lvl=Board.lvl+1;
+						System.out.println(Board.lvl);
+						System.out.println(Board.getPlayer().points);
+						Board.getPlayer().setPoints(100);
+						GameState.menager.states.push(new Board(GameState.menager));
 						
 						
 						
