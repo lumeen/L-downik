@@ -31,8 +31,10 @@ public class Board extends GameState {
 	@Override
 	public void init() {
 
-		setPlayer(new Player(300, 30));
+		player=new Player(30,0,Menu.name,0);	
+		setPlayer(player);
 		map = new Map("/maps/map1.map");
+		System.out.println(player.nick);
 		
 
 	}

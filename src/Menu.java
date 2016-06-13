@@ -33,6 +33,7 @@ public class Menu extends GameState {
 	 * Ramka okna dialogowego nicku
 	 */
 	JFrame nickFrame;
+	public static String name;
 
 	/**
 	 * KOnstruktor klasy Menu
@@ -154,7 +155,7 @@ public class Menu extends GameState {
 
 		panel.setLayout(null);
 
-		userLabel = new JLabel("Tw�j nick:");
+		userLabel = new JLabel("Twój nick:");
 		userLabel.setBounds(10, 10, 80, 25);
 		panel.add(userLabel);
 
@@ -180,6 +181,10 @@ public class Menu extends GameState {
 
 				App.getFrame().setVisible(true);
 				nickFrame.setVisible(false);
+				name=userText.getText();
+				
+				
+				
 				menager.states.push(new Board(menager));
 
 			}

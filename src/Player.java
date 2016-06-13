@@ -11,94 +11,99 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.Key;
+
 /**
  * Klasa okre�laj�ca kolizje gracza z obiektami na mapie.
  */
 
 public class Player {
-	
 
-	
-	/** 
+	/**
 	 * Pozycja gracza (piksele)
 	 */
-	private double x, y; 
-	/** 
-	 *Maksymalna szybko�� opadania gracza
+	private double x, y;
+	/**
+	 * Maksymalna szybko�� opadania gracza
 	 */
-	public static double maxfollowSpeed=2;
-	/** 
-	 *Obecna szybko�� opadania gracza
+	public static double maxfollowSpeed = 3;
+	/**
+	 * Obecna szybko�� opadania gracza
 	 */
 	private double currentFollowSpeed = 0.1;
-	/** 
-	 *Szeroko�� obiektu gracza
+	/**
+	 * Szeroko�� obiektu gracza
 	 */
-	private int width = 30;  
-	/** 
-	 *Wysoko�� oiektu gracza
+	private int width = 30;
+	/**
+	 * Wysoko�� oiektu gracza
 	 */
 	private int height = 30;
-	/** 
-	 *Nick gracza pobierany z okienka dialogowego
+	/**
+	 * Nick gracza pobierany z okienka dialogowego
 	 */
-	public static String nick = Menu.userText.getText();  
-	/** 
-	 *Sprawdzanie czy obiekt gracza jest w kolizji z platfom� (czy si� dotkaj�)
+	public static String nick ;
+	/**
+	 * Sprawdzanie czy obiekt gracza jest w kolizji z platfom� (czy si� dotkaj�)
 	 */
 
-	private boolean bottomCollision = false; 
-	/** 
+	private boolean bottomCollision = false;
+	/**
 	 * Kierunki poruszania obiektu
 	 */
-	private boolean right = false, left = false, follow = false, up = false; 
-	
-	
-	/** 
-	 * Konstruktor klasy gracza
-	 * @param x - po�o�enie gracza x
-	 * @param y - po�o�enie gracza y
-	 */
-	public Player(double x, double y) {
+	private boolean right = false, left = false, follow = false, up = false;
 
-		
+	private int points = 0;
+
+	/**
+	 * Konstruktor klasy gracza
+	 * 
+	 * @param x
+	 *            - po�o�enie gracza x
+	 * @param y
+	 *            - po�o�enie gracza y
+	 * @param points
+	 *            - punkty gracza
+	 */
+	public Player(double x, double y, String nick, int points) {
+
 		this.x = x;
 		this.y = y;
+		this.nick=nick;
+		this.points=points;
 		
-
 	}
 
-	/** 
-	 * Funkcja sprawdzaj�ca czy wyst�puj� kolizj� z platformami oraz wykonuj�ca akcje poruszania si� obiektu
-	 * @param platforms - tablica platform
+	/**
+	 * Funkcja sprawdzaj�ca czy wyst�puj� kolizj� z platformami oraz wykonuj�ca
+	 * akcje poruszania si� obiektu
+	 * 
+	 * @param platforms
+	 *            - tablica platform
 	 */
-	
-	
+
 	public void tick(Platform[][] platforms) {
 
-	
-		System.out.println(100*currentFollowSpeed);
+		System.out.println(100 * currentFollowSpeed);
 		for (int i = 0; i < platforms.length; i++) {
 			for (int j = 0; j < platforms[0].length; j++) {
 
 				if (platforms[i][j].getId() == 1) {
-					if (Collision.contain(new Point((int) x + width, (int) y
-							+ height), platforms[i][j])
-							|| Collision.contain(new Point((int) x, (int) y
-									+ height), platforms[i][j]))
+					if (Collision.contain(new Point((int) x + width, (int) y + height), platforms[i][j])
+							|| Collision.contain(new Point((int) x, (int) y + height), platforms[i][j]))
 
 					{
 
 						follow = false;
 						bottomCollision = true;
+						if(currentFollowSpeed<100){
+						Board.getPlayer().points=+100;
+						System.out.println(Board.getPlayer().points);}
 					} else if (!bottomCollision) {
 						follow = true;
 					}
 
-					if (Collision.contain(new Point((int) x + width, (int) y),
-							platforms[i][j])
-							|| Collision.contain(new Point((int) x, (int) y),
-									platforms[i][j]))
+					if (Collision.contain(new Point((int) x + width, (int) y), platforms[i][j])
+							|| Collision.contain(new Point((int) x, (int) y), platforms[i][j]))
 
 					{
 
@@ -139,23 +144,23 @@ public class Player {
 		if (!follow) {
 
 			currentFollowSpeed = 0;
-			
 
 		}
-		if(up){
-			currentFollowSpeed=currentFollowSpeed-0.01;
-			follow=false;
-			y=y-0.5;
+		if (up) {
+			currentFollowSpeed = currentFollowSpeed - 0.01;
+			follow = false;
+			y = y - 0.5;
 		}
 
 	}
-	
-	
-	/** 
+
+	/**
 	 * Funkcja rysuj�ca gracza
-	 * @param g - graphics
+	 * 
+	 * @param g
+	 *            - graphics
 	 */
-	
+
 	public void draw(Graphics g) {
 		g.drawImage(Images.background[0], 0, 0, 800, 600, null);
 		g.setColor(Color.BLACK);
@@ -163,9 +168,12 @@ public class Player {
 
 	}
 
-	/** 
-	 * Funkcja decyduj�ca co si� dzieje w przypadku wci�ni�cja klawisza sterowania graczem
-	 * @param k - int reprezentuj�cy wci�ni�ty klawisz
+	/**
+	 * Funkcja decyduj�ca co si� dzieje w przypadku wci�ni�cja klawisza
+	 * sterowania graczem
+	 * 
+	 * @param k
+	 *            - int reprezentuj�cy wci�ni�ty klawisz
 	 */
 	public void keyPressed(int k) {
 
@@ -178,13 +186,17 @@ public class Player {
 
 		if (k == KeyEvent.VK_UP) {
 
-			up =  true;
+			up = true;
 		}
 
 	}
-	/** 
-	 * Funkcja decyduj�ca co si� dzieje w przypadkupuszczenia klawisza sterowania graczem
-	 * @param k - int reprezentuj�cy puszczony klawisz
+
+	/**
+	 * Funkcja decyduj�ca co si� dzieje w przypadkupuszczenia klawisza
+	 * sterowania graczem
+	 * 
+	 * @param k
+	 *            - int reprezentuj�cy puszczony klawisz
 	 */
 	public void keyRealassed(int k) {
 		if (k == KeyEvent.VK_RIGHT) {
@@ -198,8 +210,6 @@ public class Player {
 
 			up = false;
 		}
-
-	
 
 	}
 
@@ -219,6 +229,22 @@ public class Player {
 		this.x = x;
 	}
 
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
+
+	public static String getNick() {
+		return nick;
+	}
+
+	public static void setNick(String nick) {
+		Player.nick = nick;
+	}
 
 	public static double getMaxfollowSpeed() {
 		return maxfollowSpeed;
@@ -227,5 +253,6 @@ public class Player {
 	public static void setMaxfollowSpeed(double maxfollowSpeed) {
 		Player.maxfollowSpeed = maxfollowSpeed;
 	}
+	
 
 }
