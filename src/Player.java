@@ -26,7 +26,7 @@ public class Player {
 	/** 
 	 *Maksymalna szybko�� opadania gracza
 	 */
-	public static double maxfollowSpeed=1.5;
+	public static double maxfollowSpeed=2;
 	/** 
 	 *Obecna szybko�� opadania gracza
 	 */
@@ -130,7 +130,7 @@ public class Player {
 		if (follow) {
 			y += currentFollowSpeed;
 			if (currentFollowSpeed < getMaxfollowSpeed()) {
-				currentFollowSpeed += 0.001;
+				currentFollowSpeed += 0.005;
 
 			}
 
@@ -143,9 +143,9 @@ public class Player {
 
 		}
 		if(up){
-			currentFollowSpeed=0;
+			currentFollowSpeed=currentFollowSpeed-0.01;
 			follow=false;
-			y=y-2;
+			y=y-0.5;
 		}
 
 	}

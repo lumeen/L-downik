@@ -34,7 +34,7 @@ public Images(){
 		background[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Background.jpg"));
 		player[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Player.jpg"));
 		rock[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Black.png"));
-		shapes[0]=ImageIO.read(getClass().getResourceAsStream("/Images/Block.jpg"));
+	
 	
 		
 	} catch (IOException e) {

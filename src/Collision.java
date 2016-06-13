@@ -26,6 +26,15 @@ public class Collision {
 		
 	}
 	
+	
+	
+	/**
+	 * Metoda określająca czy zachodzi kolizja pmiedzy graczem a górą
+	 * @param a - wielokąt z ktrórego zbudowane są góry
+	 * @param x - lewa wspołrzędna x gracza
+	 * @param y - górna współrzędna y gracza
+	 * @return czy zachodzi kolizja
+	 */
 	public static boolean collisionWithMountain(Polygon a, double x, double y){
 		
 		Area areaA = new Area(a);
