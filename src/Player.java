@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.Key;
 /**
- * Klasa okreœlaj¹ca kolizje gracza z obiektami na mapie.
+ * Klasa okreï¿½lajï¿½ca kolizje gracza z obiektami na mapie.
  */
 
 public class Player {
@@ -24,27 +24,27 @@ public class Player {
 	 */
 	private double x, y; 
 	/** 
-	 *Maksymalna szybkoœœ opadania gracza
+	 *Maksymalna szybkoï¿½ï¿½ opadania gracza
 	 */
 	public static double maxfollowSpeed=1.5;
 	/** 
-	 *Obecna szybkoœœ opadania gracza
+	 *Obecna szybkoï¿½ï¿½ opadania gracza
 	 */
 	private double currentFollowSpeed = 0.1;
 	/** 
-	 *Szerokoœæ obiektu gracza
+	 *Szerokoï¿½ï¿½ obiektu gracza
 	 */
-	private int width = 40;  
+	private int width = 30;  
 	/** 
-	 *Wysokoœæ oiektu gracza
+	 *Wysokoï¿½ï¿½ oiektu gracza
 	 */
-	private int height = 40;
+	private int height = 30;
 	/** 
 	 *Nick gracza pobierany z okienka dialogowego
 	 */
 	public static String nick = Menu.userText.getText();  
 	/** 
-	 *Sprawdzanie czy obiekt gracza jest w kolizji z platfom¹ (czy siê dotkaj¹)
+	 *Sprawdzanie czy obiekt gracza jest w kolizji z platfomï¿½ (czy siï¿½ dotkajï¿½)
 	 */
 
 	private boolean bottomCollision = false; 
@@ -56,8 +56,8 @@ public class Player {
 	
 	/** 
 	 * Konstruktor klasy gracza
-	 * @param x - po³o¿enie gracza x
-	 * @param y - po³o¿enie gracza y
+	 * @param x - poï¿½oï¿½enie gracza x
+	 * @param y - poï¿½oï¿½enie gracza y
 	 */
 	public Player(double x, double y) {
 
@@ -69,7 +69,7 @@ public class Player {
 	}
 
 	/** 
-	 * Funkcja sprawdzaj¹ca czy wystêpuj¹ kolizjê z platformami oraz wykonuj¹ca akcje poruszania siê obiektu
+	 * Funkcja sprawdzajï¿½ca czy wystï¿½pujï¿½ kolizjï¿½ z platformami oraz wykonujï¿½ca akcje poruszania siï¿½ obiektu
 	 * @param platforms - tablica platform
 	 */
 	
@@ -130,7 +130,7 @@ public class Player {
 		if (follow) {
 			y += currentFollowSpeed;
 			if (currentFollowSpeed < getMaxfollowSpeed()) {
-				currentFollowSpeed += 0.01;
+				currentFollowSpeed += 0.001;
 
 			}
 
@@ -152,7 +152,7 @@ public class Player {
 	
 	
 	/** 
-	 * Funkcja rysuj¹ca gracza
+	 * Funkcja rysujï¿½ca gracza
 	 * @param g - graphics
 	 */
 	
@@ -164,8 +164,8 @@ public class Player {
 	}
 
 	/** 
-	 * Funkcja decyduj¹ca co siê dzieje w przypadku wciœniêcja klawisza sterowania graczem
-	 * @param k - int reprezentuj¹cy wciœniêty klawisz
+	 * Funkcja decydujï¿½ca co siï¿½ dzieje w przypadku wciï¿½niï¿½cja klawisza sterowania graczem
+	 * @param k - int reprezentujï¿½cy wciï¿½niï¿½ty klawisz
 	 */
 	public void keyPressed(int k) {
 
@@ -183,8 +183,8 @@ public class Player {
 
 	}
 	/** 
-	 * Funkcja decyduj¹ca co siê dzieje w przypadkupuszczenia klawisza sterowania graczem
-	 * @param k - int reprezentuj¹cy puszczony klawisz
+	 * Funkcja decydujï¿½ca co siï¿½ dzieje w przypadkupuszczenia klawisza sterowania graczem
+	 * @param k - int reprezentujï¿½cy puszczony klawisz
 	 */
 	public void keyRealassed(int k) {
 		if (k == KeyEvent.VK_RIGHT) {

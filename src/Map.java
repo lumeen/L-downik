@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Area;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,8 +56,8 @@ public class Map {
 
 		}
 		
-		int[] x={0,100,150,230,300,375,475,500,600,650,750,800,0};
-		int[] y= {500,400,460,370,420,500,600,390,450,410,390,500,500};
+		int[] x={0,100,150,230,300,375,475,500,600,650,750,800};
+		int[] y= {500,400,460,370,420,500,600,390,450,410,390,500};
 		Polygon d= new Polygon(x,y,x.length);
 		g.setColor(Color.BLACK);
 		
@@ -62,16 +65,23 @@ public class Map {
 	g.setColor(Color.BLACK);
 		g.fillPolygon(d);
 		
-		if(d.getBounds().contains(Board.getPlayer().getX(),Board.getPlayer().getY(),40,40)){
+	//	if(d.getBounds().intersects(Board.getPlayer().getX(),Board.getPlayer().getY(),30,30)){
 			
-			System.out.println("LOooooooooooooooooooool");
+		//	System.out.println("LOooooooooooooooooooool");
 			
-		}
+		//}
 			
+	if(Collision.collisionWithMountain(d, Board.getPlayer().getX(),  Board.getPlayer().getY())){
+		
+		
+		System.out.println("looooooooooooooll");
+		
+	}
 		
 	
 		
 	}
+	//Popraiwćs
 	
 
 	/**
@@ -113,6 +123,7 @@ public class Map {
 		}
 
 	}
+
 
 	public void setBlocks(Platform[][] blocks) {
 		this.blocks = blocks;
