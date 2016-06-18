@@ -37,6 +37,7 @@ public class Collision {
 	 */
 	public static boolean collisionWithMountain(Polygon a, double x, double y){
 		
+		Defeat.reason="Zderzyłeś się z górą!";
 		Area areaA = new Area(a);
 		   areaA.intersect(new Area(new Rectangle((int) x, (int) y, 30, 30)));
 		   return !areaA.isEmpty();

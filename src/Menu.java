@@ -45,7 +45,7 @@ public class Menu extends GameState {
 	/**
 	 * Tablica z funkcjami menu
 	 */
-	private String[] options = { "Nowa gra", "Najlepsze wynik", "Gra sieciowa", "Wyj�ice" };
+	private String[] options = { "Nowa gra", "Najlepsze wynik", "Gra sieciowa", "Wyjśice" };
 	/**
 	 * Obecny wyb�r opcji z menu
 	 */

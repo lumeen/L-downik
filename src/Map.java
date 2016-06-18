@@ -68,10 +68,10 @@ public	int[] yPointsTabNum;
 		
 	
 		Polygon d = new Polygon(xPointsTabNum, yPointsTabNum, xPointsTabNum.length);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 
 		g.drawPolygon(d);
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.W);
 		g.fillPolygon(d);
 
 		if (Collision.collisionWithMountain(d, Board.getPlayer().getX(), Board.getPlayer().getY())) {

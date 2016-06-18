@@ -91,9 +91,10 @@ public class HighscoreManager {
 			x = max;
 		}
 		while (i < x) {
-			highscoreString += (i + 1) + ".\t" + scores.get(i).getNaam() + "\t\t" + scores.get(i).getScore() + "\n"+"\n";
+			highscoreString += (i + 1) + ".\t" + scores.get(i).getNaam() + "\t\t" + scores.get(i).getScore()+ System.lineSeparator();
 			i++;
 		}
+	//	System.out.println(highscoreString);
 		
 		return highscoreString;
 	}

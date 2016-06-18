@@ -31,11 +31,23 @@ public class Player {
 	 */
 	private double currentFollowSpeed = 0.1;
 	/**
-	 * Szeroko�� obiektu gracza
+	 * Obecna szybkość pozioma gracza w prawą strone
+	 */
+	private double currentHorizontalSpeedRight = 0;
+	/**
+	 * Obecna szybkość pozioma gracza w lewą strone
+	 */
+	private double currentHorizontalSpeedLeft = 0;
+	/**
+	 * Obecna szybkość pozioma gracza (ogólnie)
+	 */
+	private double currentHorizontalSpeedgeneral;
+	/**
+	 * Szerokość obiektu gracza
 	 */
 	private int width = 30;
 	/**
-	 * Wysoko�� oiektu gracza
+	 * Wysokość oiektu gracza
 	 */
 	private int height = 30;
 	/**
@@ -43,7 +55,7 @@ public class Player {
 	 */
 	public static String nick;
 	/**
-	 * Sprawdzanie czy obiekt gracza jest w kolizji z platfom� (czy si� dotkaj�)
+	 * Sprawdzanie czy obiekt gracza jest w kolizji z platfomą (czy się dotkają)
 	 */
 
 	private boolean bottomCollision = false;
@@ -52,7 +64,9 @@ public class Player {
 	 */
 	private boolean right = false, left = false, follow = false, up = false;
 
-	private int points = 0;
+	private static int points = 0;
+
+	private double fuel = 100;
 
 	/**
 	 * Konstruktor klasy gracza
@@ -64,14 +78,13 @@ public class Player {
 	 * @param points
 	 *            - punkty gracza
 	 */
-	public Player(double x, double y, String nick, int points) {
+	public Player(double x, double y, String nick, double fueal) {
 
 		this.x = x;
 		this.y = y;
 		this.nick = nick;
-		this.points = points;
-		  
-		 
+
+		this.fuel = fuel;
 
 	}
 
@@ -84,9 +97,7 @@ public class Player {
 	 */
 
 	public void tick(Platform[][] platforms) {
-		
-		//System.out.println(100 * currentFollowSpeed);
-	
+
 		for (int i = 0; i < platforms.length; i++) {
 			for (int j = 0; j < platforms[0].length; j++) {
 
@@ -96,33 +107,20 @@ public class Player {
 
 					{
 
-						
-						
 						follow = false;
 						bottomCollision = true;
-						Board.lvl=Board.lvl+1;
-						System.out.println(Board.lvl);
-						System.out.println(Board.getPlayer().points);
-						Board.getPlayer().setPoints(100);
-						GameState.menager.states.push(new Board(GameState.menager));
-						
-						
-						
-						
-						
-						
-						
+						points = (int) (100 + points + Board.getPlayer().getFuel());
+						Board.lvl = Board.lvl + 1;
+						// System.out.println(Board.lvl);
+						System.out.println("x " + Board.getPlayer().x + "y " + Board.getPlayer().y);
 
-							
-							
-							
-					
+						GameState.menager.states.push(new Board(GameState.menager));
+						break;
+
 					} else if (!bottomCollision) {
 						follow = true;
-						
-						
+
 					}
-					  
 
 					if (Collision.contain(new Point((int) x + width, (int) y), platforms[i][j])
 							|| Collision.contain(new Point((int) x, (int) y), platforms[i][j]))
@@ -136,11 +134,13 @@ public class Player {
 
 			}
 
-		
-			
+		}
+
+		if (Board.getPlayer().getY() > 443 && currentFollowSpeed * 100 > 100) {
+			GameState.menager.states.push(new Defeat(GameState.menager));
+			Defeat.reason = "Prędkość w czesie lądowanie była za duża!";
 
 		}
-	
 
 		bottomCollision = false;
 
@@ -152,13 +152,29 @@ public class Player {
 			right = false;
 		}
 
-		if (right)
-			x=x+0.5;
+		if (right) {
+			// currentHorizontalSpeedgeneral = currentHorizontalSpeedRight;
+			x = x + 0.5;
+			// if(currentHorizontalSpeedLeft==0)
+			// currentHorizontalSpeedLeft=0;
+			// else{
+			// currentHorizontalSpeedLeft =currentHorizontalSpeedLeft -0.05;
+			// currentHorizontalSpeedRight = currentHorizontalSpeedRight +
+			// 0.005;
+		}
+		// }
 
-		if (left)
+		if (left) {
+			// currentHorizontalSpeedgeneral = currentHorizontalSpeedLeft;
+			x = x - 0.5;
+			// if(currentHorizontalSpeedRight==0)
+			// currentHorizontalSpeedRight=0;
+			// else{
+			// currentHorizontalSpeedRight = currentHorizontalSpeedRight-0.05;
+			// currentHorizontalSpeedLeft = currentHorizontalSpeedLeft + 0.005;
 
-			x=x-0.5;
-
+		}
+		// }
 		if (follow) {
 			y += currentFollowSpeed;
 			if (currentFollowSpeed < getMaxfollowSpeed()) {
@@ -175,14 +191,13 @@ public class Player {
 		}
 		if (up) {
 			currentFollowSpeed = currentFollowSpeed - 0.01;
+			if (currentFollowSpeed < 0)
+				currentFollowSpeed = 0;
 			follow = false;
 			y = y - 0.5;
 		}
 
 	}
-	
-
-
 
 	/**
 	 * Funkcja rysuj�ca gracza
@@ -195,7 +210,6 @@ public class Player {
 		g.drawImage(Images.background[0], 0, 0, 800, 600, null);
 		g.setColor(Color.BLACK);
 		g.drawImage(Images.player[0], (int) x, (int) y, width, height, null);
-	
 
 	}
 
@@ -209,15 +223,37 @@ public class Player {
 	public void keyPressed(int k) {
 
 		if (k == KeyEvent.VK_RIGHT) {
-			right = true;
+
+			if (Board.getPlayer().getFuel() > 0) {
+				right = true;
+				fuel = fuel - 5;
+			}
+
 		}
 		if (k == KeyEvent.VK_LEFT) {
-			left = true;
+
+			if (Board.getPlayer().getFuel() >0) {
+				left = true;
+				fuel = fuel - 5;
+			}
 		}
 
 		if (k == KeyEvent.VK_UP) {
 
-			up = true;
+			if (Board.getPlayer().getFuel() > 0) {
+
+				up = true;
+				fuel = fuel - 5;
+			}
+		}
+
+		if (k == KeyEvent.VK_P) {
+			GamePanel.pause = true;
+
+		}
+		if (k == KeyEvent.VK_O) {
+
+			GamePanel.pause = false;
 		}
 
 	}
@@ -232,14 +268,18 @@ public class Player {
 	public void keyRealassed(int k) {
 		if (k == KeyEvent.VK_RIGHT) {
 			right = false;
+			currentHorizontalSpeedRight = 0;
+
 		}
 		if (k == KeyEvent.VK_LEFT) {
 			left = false;
+			currentHorizontalSpeedLeft = 0;
 		}
 
 		if (k == KeyEvent.VK_UP) {
 
 			up = false;
+
 		}
 
 	}
@@ -260,12 +300,12 @@ public class Player {
 		this.x = x;
 	}
 
-	public int getPoints() {
+	public static int getPoints() {
 		return points;
 	}
 
-	public void setPoints(int points) {
-		this.points = points;
+	public static void setPoints(int points) {
+		Player.points = points;
 	}
 
 	public static String getNick() {
@@ -282,6 +322,46 @@ public class Player {
 
 	public static void setMaxfollowSpeed(double maxfollowSpeed) {
 		Player.maxfollowSpeed = maxfollowSpeed;
+	}
+
+	public double getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(double fuel) {
+		this.fuel = fuel;
+	}
+
+	public double getCurrentFollowSpeed() {
+		return currentFollowSpeed;
+	}
+
+	public void setCurrentFollowSpeed(double currentFollowSpeed) {
+		this.currentFollowSpeed = currentFollowSpeed;
+	}
+
+	public double getCurrentHorizontalSpeedRight() {
+		return currentHorizontalSpeedRight;
+	}
+
+	public void setCurrentHorizontalSpeedRight(double currentHorizontalSpeedRight) {
+		this.currentHorizontalSpeedRight = currentHorizontalSpeedRight;
+	}
+
+	public double getCurrentHorizontalSpeedLeft() {
+		return currentHorizontalSpeedLeft;
+	}
+
+	public void setCurrentHorizontalSpeedLeft(double currentHorizontalSpeedLeft) {
+		this.currentHorizontalSpeedLeft = currentHorizontalSpeedLeft;
+	}
+
+	public double getCurrentHorizontalSpeedgeneral() {
+		return currentHorizontalSpeedgeneral;
+	}
+
+	public void setCurrentHorizontalSpeedgeneral(double currentHorizontalSpeedgeneral) {
+		this.currentHorizontalSpeedgeneral = currentHorizontalSpeedgeneral;
 	}
 
 }

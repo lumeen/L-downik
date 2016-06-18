@@ -9,40 +9,42 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	/**
-	 * Szerokoœæ okna -  wczytywana z pliku
+	 * Szerokoï¿½ï¿½ okna -  wczytywana z pliku
 	 */
 	public static int WIDTH ;
 	/**
-	 * Wysokoœæ platformy
+	 * Wysokoï¿½ï¿½ platformy
 	 */
 	public static int HIGHTH ;;
 	/**
-	 * G³ówny w¹tek gry
+	 * Gï¿½ï¿½wny wï¿½tek gry
 	 */
-	private Thread thread;
+	public static Thread thread;
 	
 	/**
-	 *Funkcja ustawiaj¹ca gówny w¹tek gry
+	 *Funkcja ustawiajï¿½ca gï¿½wny wï¿½tek gry
 	 */
 
 	public void setThread(Thread thread) {
 		this.thread = thread;
 	}
 	/**
-	 * Boolean decyduj¹cy czy gra powinna byæ odœwie¿ana
+	 * Boolean decydujï¿½cy czy gra powinna byï¿½ odï¿½wieï¿½ana
 	 */
 	public static boolean status = false;
 	/**
-	 * Menager zarz¹dzaj¹cy tym co aktualnie poawia siê na ekranie (Manu, plansza gry itp)
+	 * Menager zarzï¿½dzajï¿½cy tym co aktualnie poawia siï¿½ na ekranie (Manu, plansza gry itp)
 	 */
 	private StateMenager menager;
 	/**
-	 *Timer decyduj¹cy o czêstoœæi odœwie¿ania gry
+	 *Timer decydujï¿½cy o czï¿½stoï¿½ï¿½i odï¿½wieï¿½ania gry
 	 */
 	private long targetTime = 1000 / 60;
 	/**
-	 * Konstruktor klasy GamePanel - startuj¹ca grê
+	 * Konstruktor klasy GamePanel - startujï¿½ca grï¿½
 	 */
+	
+	public static boolean pause=false;
 	public GamePanel() {
 	
 		
@@ -55,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	}
 	/**
-	 *Funkcja startuj¹ca w¹tek
+	 *Funkcja startujï¿½ca wï¿½tek
 	 */
 	private void start() {
 		status = true;
@@ -63,13 +65,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		thread.start();
 	}
 	/**
-	 * Funkcja ustawiaj¹ca g³ówn¹ pêtlê gry.
+	 * Funkcja ustawiajï¿½ca gï¿½ï¿½wnï¿½ pï¿½tlï¿½ gry.
 	 */
 	@Override
 	public void run() {
 		menager = new StateMenager();
 		long start, duration, wait;
-
+if(!pause){
 		while (status) {
 			start = System.nanoTime();
 			
@@ -89,10 +91,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				}
 
 			
-		}
+		}}
 	}
 	/**
-	 * Funkcja updatuj¹ca logikê gry
+	 * Funkcja updatujï¿½ca logikï¿½ gry
 	 */
 	public void tick() {
 		menager.tick();

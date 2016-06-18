@@ -1,8 +1,12 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 public class Defeat extends GameState {
+	
+	
+	public static String reason="";
 
 	public Defeat(StateMenager menager) {
 		super(menager);
@@ -16,7 +20,7 @@ public class Defeat extends GameState {
 		// TODO Auto-generated method stub
 		
 		HighscoreManager hm = new HighscoreManager();
-		hm.addScore(Board.getPlayer().getNick(), Board.getPlayer().getPoints());
+		hm.addScore(Board.getPlayer().getNick(), Player.getPoints());
 		
 	}
 
@@ -31,11 +35,19 @@ public class Defeat extends GameState {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(new Color(23, 20, 71));
+	
+		
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HIGHTH);
+		
+		g.setFont(new Font("Arial",Font.PLAIN,80));
+		g.setColor(new Color(202, 10, 10));
+		g.drawString("Porażka",250, 100);
+		g.setFont(new Font("Arial",Font.PLAIN,40));
 		g.setColor(new Color(10, 71, 0));
-		g.setFont(new Font("Arial",Font.PLAIN,60));
-		g.drawString("Porażka",GamePanel.WIDTH/2-170, 150);
-		g.drawString("Twój wynik to " + Board.getPlayer().getPoints() + " pkt",GamePanel.WIDTH/2-170, 200);
+		g.drawString(reason,10,250);
+		g.drawString("Twój wynik to " + Player.getPoints() + " pkt",10, 300);
+		g.setFont(new Font("Arial",Font.PLAIN,20));
+		g.drawString("Aby powrócić do menu glównego wciśnij przycisk M",180 , 450);	
 		
 		
 		
@@ -44,7 +56,8 @@ public class Defeat extends GameState {
 
 	@Override
 	public void keyPressed(int k) {
-		// TODO Auto-generated method stub
+		if(k==KeyEvent.VK_M)
+			GameState.menager.states.push(new Menu(GameState.menager));
 		
 	}
 

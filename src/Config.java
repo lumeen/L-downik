@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Klsa wczytuj¹ca z pliku dane konfiguracyjne
+ * Klsa wczytujï¿½ca z pliku dane konfiguracyjne
  */
 public class Config {
 	
@@ -14,7 +14,7 @@ public class Config {
 	 */
 	static String fileName="Config.txt";
 	/**
-	 * Funkcja wczytuj¹ca dane z pliku
+	 * Funkcja wczytujï¿½ca dane z pliku
 	 */
 	public static void readConfig() throws NumberFormatException, IOException{
 		
@@ -28,7 +28,7 @@ public class Config {
 		  
 			
 			
-		System.out.println(GamePanel.HIGHTH);
+		//System.out.println(GamePanel.HIGHTH);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
