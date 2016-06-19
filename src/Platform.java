@@ -1,48 +1,53 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
 /**
- * Klasa reprezentuj¹ca platformê londowiska
+ * Klasa reprezentujÄ…ca platformÄ™ londowiska
  */
 public class Platform extends Rectangle {
 	/**
-	 * Szerokoœc platformy
+	 * SzerokoÅ›c platformy
 	 */
 	public static int platformWidth = 25;
 	/**
-	 * Wysokoœæ platformy
+	 * WysokoÅ›Ä‡ platformy
 	 */
 	public static int platformHight = 25;
 	/**
-	 * ID platformy u¿ywanie do konfiguracji mapy(po³o¿enia londowiska)
+	 * ID platformy uÅ¼ywanie do konfiguracji mapy(poÅ‚oÅ¼enia lÄ…dowiska)
 	 */
 	private int id;
+
 	/**
-	 * Kokstruktor klasy Platforma ustawiaj¹cy parametry platformy
-	 * @param x - po³o¿enie x platformy
-	 * @param y - po³o¿enie y platformy
-	 * @param id - id platformy
+	 * Kokstruktor klasy Platforma ustawiajï¿½cy parametry platformy
+	 * 
+	 * @param x
+	 *            - poÅ‚oÅ¼enie x platformy
+	 * @param y
+	 *            - poÅ‚oÅ¼enie y platformy
+	 * @param id
+	 *            - id platformy
 	 */
 	public Platform(int x, int y, int id) {
 		setBounds(x, y, platformWidth, platformHight);
 		this.id = id;
 
 	}
+
 	/**
-	 * Funkcja rysuj¹ca platformy
-	 * @param g - graphic
+	 * Funkcja rysujÄ…ca platformy
+	 * 
+	 * @param g
+	 *            - graphic
 	 */
 	public void draw(Graphics g) {
 		if (id == 1) {
-			g.drawImage(Images.blocks[id-1], x,y,width,height,null);
-			
-			
-				
-			}
-	
+			g.drawImage(Images.blocks[id - 1], x, y, width, height, null);
+
+		}
+
 	}
-
-
 
 	public int getId() {
 		return id;

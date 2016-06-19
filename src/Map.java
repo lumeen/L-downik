@@ -12,15 +12,15 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 
 /**
- * Klasa reprezentuj�ca map� gry - jeden poziom
+ * Klasa reprezentująca mapę gry - jeden poziom
  */
 public class Map {
 	/**
-	 * �cie�ka do pliku z parametrami wybranej mapy
+	 * Ścieżka do pliku z parametrami wybranej mapy
 	 */
 	private String path;
 	/**
-	 * Szeroko�� i wysoko�� mapy (liczba blok�w)
+	 * Szerokość i wysokość mapy (liczba bloków)
 	 */
 	private int width, hight;
 	/**
@@ -28,17 +28,23 @@ public class Map {
 	 */
 	private Platform[][] blocks;
 	/**
-	 * Tablica ska�
+	 * Tablica skał
 	 */
-	private Rock[][] rocks;
-
-public	int[] xPointsTabNum;
-public	int[] yPointsTabNum;
+	// private Rock[][] rocks;
 	/**
-	 * Konstruktor klasy Map - wywo�anie funkcji wczytywania danych mapy z pliku
+	 * Tablica punktów x wielokąta
+	 */
+	public int[] xPointsTabNum;
+	/**
+	 * Tablica punktów y wielokąta
+	 */
+	public int[] yPointsTabNum;
+
+	/**
+	 * Konstruktor klasy Map - wywołanie funkcji wczytywania danych mapy z pliku
 	 * 
 	 * @param filePath
-	 *            - �cie�ka do pliku
+	 *            - ścieżka do pliku
 	 */
 	public Map(String filePath) {
 
@@ -50,7 +56,7 @@ public	int[] yPointsTabNum;
 	/**
 	 * Funkcja rysowania mapy
 	 * 
-	 * @pram g - grphic
+	 * @pram g - grphics
 	 */
 	public void draw(Graphics g) {
 
@@ -59,36 +65,28 @@ public	int[] yPointsTabNum;
 			for (int j = 0; j < blocks[0].length; j++) {
 
 				blocks[i][j].draw(g);
-				rocks[i][j].draw(g);
 
 			}
 
 		}
 
-		
-	
 		Polygon d = new Polygon(xPointsTabNum, yPointsTabNum, xPointsTabNum.length);
-		g.setColor(Color.WHITE);
-
+		g.setColor(Color.GRAY);
 		g.drawPolygon(d);
-		//g.setColor(Color.W);
-		g.fillPolygon(d);
 
 		if (Collision.collisionWithMountain(d, Board.getPlayer().getX(), Board.getPlayer().getY())) {
 
 			GameState.menager.states.push(new Defeat(GameState.menager));
-			
-		
+
 		}
 
 	}
-	// Popraiwćs
 
 	/**
-	 * Funkcja wczytuj�ca dane na temat mapy z pliku
+	 * Funkcja wczytująca dane na temat mapy z plików
 	 */
 	public void loadMap() {
-		String fileName = Board.lvl+ ".txt";
+		String fileName = Board.lvl + ".txt";
 
 		InputStream is = this.getClass().getResourceAsStream(path);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -100,7 +98,6 @@ public	int[] yPointsTabNum;
 			width = Integer.parseInt(br.readLine());
 			hight = Integer.parseInt(br.readLine());
 			blocks = new Platform[hight][width];
-			rocks = new Rock[hight][width];
 
 			for (int y = 0; y < hight; y++) {
 				String line = br.readLine();
@@ -108,7 +105,6 @@ public	int[] yPointsTabNum;
 				for (int x = 0; x < width; x++) {
 					int id = Integer.parseInt(tokens[x]);
 					blocks[y][x] = new Platform(x * Platform.platformHight, y * Platform.platformWidth, id);
-					rocks[y][x] = new Rock(x * Rock.rockHight, y * Rock.rockWidth, id);
 
 				}
 
@@ -119,7 +115,7 @@ public	int[] yPointsTabNum;
 			yPoints = br.readLine();
 			String[] xPointsTab = xPoints.split(", ");
 			String[] yPointsTab = yPoints.split(", ");
-			 xPointsTabNum = new int[xPointsTab.length];
+			xPointsTabNum = new int[xPointsTab.length];
 			for (int i = 0; i < xPointsTab.length; i++) {
 				xPointsTabNum[i] = Integer.parseInt(xPointsTab[i]);
 			}
@@ -127,8 +123,6 @@ public	int[] yPointsTabNum;
 			for (int i = 0; i < yPointsTab.length; i++) {
 				yPointsTabNum[i] = Integer.parseInt(yPointsTab[i]);
 			}
-			
-		
 
 		} catch (NumberFormatException e) {
 

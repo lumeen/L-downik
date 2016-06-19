@@ -7,28 +7,27 @@ public class Board extends GameState {
 	/**
 	 * Obiekt gracza
 	 */
-	private static Player player; 
+	private static Player player;
 	/**
-	 * Tablica obiekt�w platform
+	 * Tablica obiektów platform
 	 */
 	public Platform[] platforms;
 	/**
-	 * Tablica obiekt�w ska�
-	 */
-	public Rock [] rocks;
-	/**
 	 * Obiekt mapy
 	 */
- 	private Map map;
+	private Map map;
+	/**
+	 * Number obecnego levela
+	 */
+	public static int lvl = 1;
+	/**
+	 * Generator liczb losowych, do losowania początkowej pozycji rakiety
+	 */
+	Random generator = new Random();
 
- 	/**
- 	 * Konstruktor klasy Board - przys�oni�cie konstruktora StateMenager
- 	 */
- 	
- 	public static int lvl=1;
- 	
- 	Random generator=new Random();
- 
+	/**
+	 * Konstruktor klasy Board
+	 */
 	public Board(StateMenager menager) {
 		super(menager);
 
@@ -36,25 +35,24 @@ public class Board extends GameState {
 
 	@Override
 	public void init() {
-		
 
-		player=new Player(30,0,Menu.name,100);	
+		player = new Player((double) (randInt(50, 750)), 0, Menu.name, 100);
 		setPlayer(player);
-		map = new Map("/maps/map" + lvl+ ".map");
-	//	System.out.println(lvl);
-		
+		map = new Map("/maps/map" + lvl + ".map");
 
 	}
+
 	/**
-	 * Funkcja aktualizuj�ca logik� gry
+	 * Funkcja aktualizujuca logikę gry
 	 */
 	@Override
 	public void tick() {
-		
+
 		getPlayer().tick(map.getBlocks());
 	}
+
 	/**
-	 * Funkcja odpowiadaj�ca za rysowanie element�w
+	 * Funkcja odpowiadająca za rysowanie elementów
 	 */
 	@Override
 	public void draw(Graphics g) {
@@ -62,23 +60,24 @@ public class Board extends GameState {
 		getPlayer().draw(g);
 		map.draw(g);
 		g.setColor(new Color(235, 23, 23));
-		g.drawString("Paliwo: "+String.valueOf(player.getFuel()), 600, 20);
-		g.drawString("Prędkość spadnia: "+ Integer.valueOf((int) (player.getCurrentFollowSpeed()*100)), 600, 40);
-	//	g.drawString("Prędkośc pozioma "+ Integer.valueOf((int)(player.getCurrentHorizontalSpeedgeneral()*100)), 600, 60);
+		g.drawString("Paliwo: " + String.valueOf(player.getFuel()), 600, 20);
+		g.drawString("Prędkość spadnia: " + Integer.valueOf((int) (player.getCurrentFollowSpeed() * 100)), 600, 40);
 		g.setColor(new Color(10, 71, 0));
-		g.drawString("Twój wynik to " + Player.getPoints() + " pkt",600, 60);
-		
+		g.drawString("Twój wynik to " + Player.getPoints() + " pkt", 600, 60);
+
 	}
+
 	/**
-	 * Funkcja odpowiadająca za nacicnięcie przycisku 
+	 * Funkcja odpowiadająca za nacicnięcie przycisku
 	 */
 	@Override
 	public void keyPressed(int k) {
 
 		getPlayer().keyPressed(k);
 	}
+
 	/**
-	 * Funkcja odpowiadaj�ca za puszczenie przycisku 
+	 * Funkcja odpowiadająca za puszczenie przycisku
 	 */
 	@Override
 	public void keyReleased(int k) {
@@ -93,17 +92,20 @@ public class Board extends GameState {
 	public static void setPlayer(Player player) {
 		Board.player = player;
 	}
-	
+
+	/**
+	 * Funkcja odpowiadająca za obliczenie początkowej pozycji gracza
+	 * 
+	 * @param min
+	 *            - wartość początkowa przedziału, z którego loswane będą liczby
+	 * @param max
+	 *            - wartość końcowa przedziału, z którego loswane będą liczby
+	 * @return randomNum - liczba losowa z przedziału (min;max) - integer
+	 */
 	public static int randInt(int min, int max) {
-
-	   
-	    Random rand=new Random();
-
-	   
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
-
-	    return randomNum;
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
 	}
-
 
 }

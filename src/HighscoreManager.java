@@ -7,35 +7,67 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class HighscoreManager {
+/**
+ * Klasa odpowiadająca za zarządzanie listą najlepszych wyników
+ */
 
+public class HighscoreManager {
+	/**
+	 * Lista najlepszych wyników
+	 */
 	private ArrayList<Score> scores;
+	/**
+	 * Plik, gdzie zapisywane są najlepsze wyniki
+	 */
 	private static final String HIGHSCORE_FILE = "scores.dat";
+	/**
+	 * Outpustream
+	 */
 	ObjectOutputStream outputStream = null;
+	/**
+	 * Inputstream
+	 */
 	ObjectInputStream inputStream = null;
 
+	/**
+	 * Konstruktor klasy HighscoreManager
+	 */
 	public HighscoreManager() {
 		// initialising the scores-arraylist
 		scores = new ArrayList<Score>();
 	}
 
+	/**
+	 * Funkcja get listy najlepszych wynikąw
+	 * 
+	 * @return - lista najlepszych wyników
+	 */
 	public ArrayList<Score> getScores() {
 		loadScoreFile();
 		sort();
 		return scores;
 	}
 
+	/**
+	 * Funkcja sortująca listę najlepszych wyników od najlepszego do najgorszego
+	 */
 	private void sort() {
 		ScoreComparator comparator = new ScoreComparator();
 		Collections.sort(scores, comparator);
 	}
 
+	/**
+	 * Funkcja dodająca wynik do listy
+	 */
 	public void addScore(String name, int score) {
 		loadScoreFile();
 		scores.add(new Score(name, score));
 		updateScoreFile();
 	}
 
+	/**
+	 * Funkcja wczytująca wyniki z pliku
+	 */
 	public void loadScoreFile() {
 		try {
 			inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
@@ -58,6 +90,9 @@ public class HighscoreManager {
 		}
 	}
 
+	/**
+	 * Funkcja odświeżająca plik z wynikami
+	 */
 	public void updateScoreFile() {
 		try {
 			outputStream = new ObjectOutputStream(new FileOutputStream(HIGHSCORE_FILE));
@@ -76,27 +111,6 @@ public class HighscoreManager {
 				System.out.println("[Update] Error: " + e.getMessage());
 			}
 		}
-	}
-
-	public String getHighscoreString() {
-		String highscoreString = "";
-		 final  int max = 10;
-
-		ArrayList<Score> scores;
-		scores = getScores();
-
-		int i = 0;
-		int x = scores.size();
-		if (x > max) {
-			x = max;
-		}
-		while (i < x) {
-			highscoreString += (i + 1) + ".\t" + scores.get(i).getNaam() + "\t\t" + scores.get(i).getScore()+ System.lineSeparator();
-			i++;
-		}
-	//	System.out.println(highscoreString);
-		
-		return highscoreString;
 	}
 
 }

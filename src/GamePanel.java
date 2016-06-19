@@ -9,45 +9,51 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	/**
-	 * Szeroko�� okna -  wczytywana z pliku
+	 * Szerokość okna - wczytywana z pliku
 	 */
-	public static int WIDTH ;
+	public static int WIDTH;
 	/**
-	 * Wysoko�� platformy
+	 * Wysoko okna - wczytywanie z pliku
 	 */
-	public static int HIGHTH ;;
+	public static int HIGHTH;;
 	/**
-	 * G��wny w�tek gry
+	 * Główny wątek gry
 	 */
 	public static Thread thread;
-	
+
 	/**
-	 *Funkcja ustawiaj�ca g�wny w�tek gry
+	 * Funkcja ustawiająca głwny wątek gry
 	 */
 
 	public void setThread(Thread thread) {
 		this.thread = thread;
 	}
+
 	/**
-	 * Boolean decyduj�cy czy gra powinna by� od�wie�ana
+	 * Boolean decydujący czy gra powinna być odświeżana
 	 */
 	public static boolean status = false;
 	/**
-	 * Menager zarz�dzaj�cy tym co aktualnie poawia si� na ekranie (Manu, plansza gry itp)
+	 * Boolean sprawdzający czy gra została wstrzymana
 	 */
+	public static boolean pause = false;
+	/**
+	 * Menager zarządzający tym co aktualnie pojawia się na ekranie (Manu,
+	 * plansza gry itp)
+	 */
+
 	private StateMenager menager;
 	/**
-	 *Timer decyduj�cy o cz�sto��i od�wie�ania gry
+	 * Timer decydujący o częstotliwości odświeżania gry
 	 */
 	private long targetTime = 1000 / 60;
+
 	/**
-	 * Konstruktor klasy GamePanel - startuj�ca gr�
+	 * Konstruktor klasy GamePanel - startująca grą
 	 */
-	
-	public static boolean pause=false;
+
 	public GamePanel() {
-	
-		
+
 		addKeyListener(this);
 		setFocusable(true);
 
@@ -56,48 +62,52 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		start();
 
 	}
+
 	/**
-	 *Funkcja startuj�ca w�tek
+	 * Funkcja startująca wątek
 	 */
 	private void start() {
 		status = true;
 		thread = new Thread(this);
 		thread.start();
 	}
+
 	/**
-	 * Funkcja ustawiaj�ca g��wn� p�tl� gry.
+	 * Funkcja ustawiająca główną pętlę gry.
 	 */
 	@Override
 	public void run() {
+
 		menager = new StateMenager();
 		long start, duration, wait;
-if(!pause){
+
 		while (status) {
 			start = System.nanoTime();
-			
-				tick();
-				repaint();
-				duration = System.nanoTime() - start;
-				wait = targetTime / 1000000;
 
-				if (wait <= 0) {
-					wait = 5;
+			tick();
+			repaint();
+			duration = System.nanoTime() - start;
+			wait = targetTime / 1000000;
 
-				}
-				try {
-					Thread.sleep(wait);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			if (wait <= 0) {
+				wait = 5;
 
-			
-		}}
+			}
+			try {
+				Thread.sleep(wait);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
+
 	/**
-	 * Funkcja updatuj�ca logik� gry
+	 * Funkcja updatująca logikę gry
 	 */
 	public void tick() {
-		menager.tick();
+		if (!pause)
+			menager.tick();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -107,11 +117,18 @@ if(!pause){
 
 	}
 
+	/**
+	 * Funkcja odpowiadająca za działania w przypadku naciśnięcia danych
+	 * klawiszy
+	 */
 	public void keyPressed(KeyEvent k) {
 
 		menager.keyPressed(k.getKeyCode());
 	}
 
+	/**
+	 * Funkcja odpowiadająca za działania w przypadku puszczenia danych klawiszy
+	 */
 	public void keyReleased(KeyEvent k) {
 
 		menager.keyReleased(k.getKeyCode());

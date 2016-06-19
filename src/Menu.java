@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * Klasa wy�wietlaj�ca menu gry
+ * Klasa wyświetlająca menu gry
  */
 public class Menu extends GameState {
 	/**
@@ -36,7 +36,7 @@ public class Menu extends GameState {
 	public static String name;
 
 	/**
-	 * KOnstruktor klasy Menu
+	 * Konstruktor klasy Menu
 	 */
 	public Menu(StateMenager menager) {
 		super(menager);
@@ -47,7 +47,7 @@ public class Menu extends GameState {
 	 */
 	private String[] options = { "Nowa gra", "Najlepsze wynik", "Gra sieciowa", "Wyjśice" };
 	/**
-	 * Obecny wyb�r opcji z menu
+	 * Obecny wybór opcji z menu
 	 */
 	static int currentChoice = 0;
 
@@ -60,7 +60,7 @@ public class Menu extends GameState {
 	}
 
 	/**
-	 * Funkcja rysuj�ca menu na ekranie
+	 * Funkcja rysująca menu na ekranie
 	 * 
 	 * @param g
 	 *            - graphic
@@ -85,10 +85,10 @@ public class Menu extends GameState {
 	}
 
 	/**
-	 * Funkcja poruszania si� po menu za pomoc� przycisk�w
+	 * Funkcja poruszania się po menu za pomocą przycisków
 	 * 
 	 * @param k
-	 *            - int reprezentuj�cy wybrany przycisk
+	 *            - int reprezentujący wybrany przycisk
 	 */
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_DOWN) {
@@ -124,7 +124,7 @@ public class Menu extends GameState {
 	}
 
 	/**
-	 * Funkcja wy�wietlaj�ca panel do wpisania nicku
+	 * Funkcja wyświetlająca panel do wpisania nicku
 	 */
 	private void setNickPanel() {
 
@@ -143,14 +143,15 @@ public class Menu extends GameState {
 		nickFrame.setLocationRelativeTo(null);
 		Container c = nickFrame.getContentPane();
 		c.setBackground(Color.BLUE);
+		App.getFrame().setVisible(true);
 		nickFrame.setVisible(true);
-		App.getFrame().setVisible(false);
+
 		okClick();
 
 	}
 
 	/**
-	 * Funkcja umiejscowuj�ca komponenty na ekrenie
+	 * Funkcja umiejscowująca komponenty na ekrenie
 	 */
 	private void placeComponents(JPanel panel) {
 
@@ -171,7 +172,7 @@ public class Menu extends GameState {
 	}
 
 	/**
-	 * Funkcja wy�wietlaj�ca map� gry po zaakceptowaniu nicku
+	 * Funkcja wyświetlająca mapę gry po zaakceptowaniu nicku
 	 */
 	private void okClick() {
 
@@ -182,10 +183,8 @@ public class Menu extends GameState {
 
 				App.getFrame().setVisible(true);
 				nickFrame.setVisible(false);
-				name=userText.getText();
-				
-				
-				
+				name = userText.getText();
+
 				menager.states.push(new Board(menager));
 
 			}

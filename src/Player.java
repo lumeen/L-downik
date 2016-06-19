@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.security.Key;
 
 /**
- * Klasa okre�laj�ca kolizje gracza z obiektami na mapie.
+ * Klasa określajca kolizje gracza, kolizje, oraz zachowania gracza
  */
 
 public class Player {
@@ -23,11 +23,11 @@ public class Player {
 	 */
 	private double x, y;
 	/**
-	 * Maksymalna szybko�� opadania gracza
+	 * Maksymalna szybkość opadania gracza
 	 */
 	public static double maxfollowSpeed = 3;
 	/**
-	 * Obecna szybko�� opadania gracza
+	 * Obecna szybkość opadania gracza
 	 */
 	private double currentFollowSpeed = 0.1;
 	/**
@@ -63,8 +63,14 @@ public class Player {
 	 * Kierunki poruszania obiektu
 	 */
 	private boolean right = false, left = false, follow = false, up = false;
+	/**
+	 * Punkty gracza
+	 */
 
 	private static int points = 0;
+	/**
+	 * Paliwo rakiety
+	 */
 
 	private double fuel = 100;
 
@@ -72,9 +78,9 @@ public class Player {
 	 * Konstruktor klasy gracza
 	 * 
 	 * @param x
-	 *            - po�o�enie gracza x
+	 *            - położenie gracza x
 	 * @param y
-	 *            - po�o�enie gracza y
+	 *            - położenie gracza y
 	 * @param points
 	 *            - punkty gracza
 	 */
@@ -89,8 +95,8 @@ public class Player {
 	}
 
 	/**
-	 * Funkcja sprawdzaj�ca czy wyst�puj� kolizj� z platformami oraz wykonuj�ca
-	 * akcje poruszania si� obiektu
+	 * Funkcja sprawdzająca czy występuje kolizja z platformami oraz wykonująca
+	 * akcje poruszania się obiektu
 	 * 
 	 * @param platforms
 	 *            - tablica platform
@@ -111,7 +117,7 @@ public class Player {
 						bottomCollision = true;
 						points = (int) (100 + points + Board.getPlayer().getFuel());
 						Board.lvl = Board.lvl + 1;
-						// System.out.println(Board.lvl);
+
 						System.out.println("x " + Board.getPlayer().x + "y " + Board.getPlayer().y);
 
 						GameState.menager.states.push(new Board(GameState.menager));
@@ -153,28 +159,17 @@ public class Player {
 		}
 
 		if (right) {
-			// currentHorizontalSpeedgeneral = currentHorizontalSpeedRight;
+
 			x = x + 0.5;
-			// if(currentHorizontalSpeedLeft==0)
-			// currentHorizontalSpeedLeft=0;
-			// else{
-			// currentHorizontalSpeedLeft =currentHorizontalSpeedLeft -0.05;
-			// currentHorizontalSpeedRight = currentHorizontalSpeedRight +
-			// 0.005;
+
 		}
-		// }
 
 		if (left) {
-			// currentHorizontalSpeedgeneral = currentHorizontalSpeedLeft;
+
 			x = x - 0.5;
-			// if(currentHorizontalSpeedRight==0)
-			// currentHorizontalSpeedRight=0;
-			// else{
-			// currentHorizontalSpeedRight = currentHorizontalSpeedRight-0.05;
-			// currentHorizontalSpeedLeft = currentHorizontalSpeedLeft + 0.005;
 
 		}
-		// }
+
 		if (follow) {
 			y += currentFollowSpeed;
 			if (currentFollowSpeed < getMaxfollowSpeed()) {
@@ -200,7 +195,7 @@ public class Player {
 	}
 
 	/**
-	 * Funkcja rysuj�ca gracza
+	 * Funkcja rysująca gracza
 	 * 
 	 * @param g
 	 *            - graphics
@@ -214,11 +209,11 @@ public class Player {
 	}
 
 	/**
-	 * Funkcja decyduj�ca co si� dzieje w przypadku wci�ni�cja klawisza
+	 * Funkcja decydująca co się dzieje w przypadku wciśnięcja klawisza
 	 * sterowania graczem
 	 * 
 	 * @param k
-	 *            - int reprezentuj�cy wci�ni�ty klawisz
+	 *            - int reprezentujący wciśnięty klawisz
 	 */
 	public void keyPressed(int k) {
 
@@ -227,15 +222,17 @@ public class Player {
 			if (Board.getPlayer().getFuel() > 0) {
 				right = true;
 				fuel = fuel - 5;
-			}
+			} else
+				right = false;
 
 		}
 		if (k == KeyEvent.VK_LEFT) {
 
-			if (Board.getPlayer().getFuel() >0) {
+			if (Board.getPlayer().getFuel() > 0) {
 				left = true;
 				fuel = fuel - 5;
-			}
+			} else
+				left = false;
 		}
 
 		if (k == KeyEvent.VK_UP) {
@@ -244,26 +241,29 @@ public class Player {
 
 				up = true;
 				fuel = fuel - 5;
-			}
+			} else
+				up = false;
 		}
 
 		if (k == KeyEvent.VK_P) {
 			GamePanel.pause = true;
+			Pause p = new Pause(GameState.menager);
+			p.setPauseFrame();
+			System.out.println("lol");
 
 		}
 		if (k == KeyEvent.VK_O) {
 
-			GamePanel.pause = false;
 		}
 
 	}
 
 	/**
-	 * Funkcja decyduj�ca co si� dzieje w przypadkupuszczenia klawisza
+	 * Funkcja decydująca co się dzieje w przypadkupuszczenia klawisza
 	 * sterowania graczem
 	 * 
 	 * @param k
-	 *            - int reprezentuj�cy puszczony klawisz
+	 *            - int reprezentujący puszczony klawisz
 	 */
 	public void keyRealassed(int k) {
 		if (k == KeyEvent.VK_RIGHT) {
