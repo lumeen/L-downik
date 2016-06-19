@@ -1,21 +1,33 @@
 import java.io.Serializable;
 
+/**
+ * Klasa reprezentująca wynik gracza
+ */
+
 public class Score implements Serializable {
-	
-	  private int score;
-	    private String naam;
+	/**
+	 * Wynik punktowy gracza
+	 */
+	private int score;
+	/**
+	 * Nick gracza
+	 */
+	private String naam;
 
-	    public int getScore() {
-	        return score;
-	    }
+	/**
+	 * Konstruktor klasy Score
+	 */
+	public Score(String naam, int score) {
+		this.score = score;
+		this.naam = naam;
+	}
 
-	    public String getNaam() {
-	        return naam;
-	    }
+	public int getScore() {
+		return score;
+	}
 
-	    public Score(String naam, int score) {
-	        this.score = score;
-	        this.naam = naam;
-	    }
+	public String getNaam() {
+		return naam;
+	}
 
 }

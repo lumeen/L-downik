@@ -29,7 +29,7 @@ public class Player {
 	/**
 	 * Obecna szybkość opadania gracza
 	 */
-	private double currentFollowSpeed = 0.1;
+	private double currentFollowSpeed = 0.2;
 	/**
 	 * Obecna szybkość pozioma gracza w prawą strone
 	 */
@@ -67,12 +67,12 @@ public class Player {
 	 * Punkty gracza
 	 */
 
-	private static int points = 0;
+	public static int points = 0;
 	/**
 	 * Paliwo rakiety
 	 */
 
-	private double fuel = 100;
+	private double fuel;
 
 	/**
 	 * Konstruktor klasy gracza
@@ -115,7 +115,7 @@ public class Player {
 
 						follow = false;
 						bottomCollision = true;
-						points = (int) (100 + points + Board.getPlayer().getFuel());
+						points = (int) (100 + points + Map.lvlFuel);
 						Board.lvl = Board.lvl + 1;
 
 						System.out.println("x " + Board.getPlayer().x + "y " + Board.getPlayer().y);
@@ -142,7 +142,7 @@ public class Player {
 
 		}
 
-		if (Board.getPlayer().getY() > 443 && currentFollowSpeed * 100 > 100) {
+		if (Board.getPlayer().getY() > 440 && currentFollowSpeed * 100 > Map.maxSpeed) {
 			GameState.menager.states.push(new Defeat(GameState.menager));
 			Defeat.reason = "Prędkość w czesie lądowanie była za duża!";
 
@@ -173,7 +173,7 @@ public class Player {
 		if (follow) {
 			y += currentFollowSpeed;
 			if (currentFollowSpeed < getMaxfollowSpeed()) {
-				currentFollowSpeed += 0.005;
+				currentFollowSpeed += Map.gravitation;
 
 			}
 
@@ -188,7 +188,7 @@ public class Player {
 			currentFollowSpeed = currentFollowSpeed - 0.01;
 			if (currentFollowSpeed < 0)
 				currentFollowSpeed = 0;
-			follow = false;
+			follow = true;
 			y = y - 0.5;
 		}
 
@@ -219,28 +219,30 @@ public class Player {
 
 		if (k == KeyEvent.VK_RIGHT) {
 
-			if (Board.getPlayer().getFuel() > 0) {
+			if (Map.lvlFuel > 0) {
 				right = true;
-				fuel = fuel - 5;
+				Map.lvlFuel = Map.lvlFuel - 5;
 			} else
 				right = false;
 
 		}
 		if (k == KeyEvent.VK_LEFT) {
 
-			if (Board.getPlayer().getFuel() > 0) {
+			if (Map.lvlFuel > 0) {
 				left = true;
-				fuel = fuel - 5;
+				Map.lvlFuel = Map.lvlFuel - 5;
+				//fuel = fuel - 5;
 			} else
 				left = false;
 		}
 
 		if (k == KeyEvent.VK_UP) {
 
-			if (Board.getPlayer().getFuel() > 0) {
+			if (Map.lvlFuel> 0) {
 
 				up = true;
-				fuel = fuel - 5;
+				//fuel = fuel - 5;
+				Map.lvlFuel = Map.lvlFuel - 5;
 			} else
 				up = false;
 		}

@@ -36,7 +36,7 @@ public class Board extends GameState {
 	@Override
 	public void init() {
 
-		player = new Player((double) (randInt(50, 750)), 0, Menu.name, 100);
+		player = new Player((double) (randInt(50, 750)), 0, Menu.name, Map.lvlFuel);
 		setPlayer(player);
 		map = new Map("/maps/map" + lvl + ".map");
 
@@ -47,6 +47,7 @@ public class Board extends GameState {
 	 */
 	@Override
 	public void tick() {
+		System.out.println();
 
 		getPlayer().tick(map.getBlocks());
 	}
@@ -60,10 +61,13 @@ public class Board extends GameState {
 		getPlayer().draw(g);
 		map.draw(g);
 		g.setColor(new Color(235, 23, 23));
-		g.drawString("Paliwo: " + String.valueOf(player.getFuel()), 600, 20);
+		g.drawString("Paliwo: " + Map.lvlFuel, 600, 20);
 		g.drawString("Prędkość spadnia: " + Integer.valueOf((int) (player.getCurrentFollowSpeed() * 100)), 600, 40);
+		
 		g.setColor(new Color(10, 71, 0));
-		g.drawString("Twój wynik to " + Player.getPoints() + " pkt", 600, 60);
+		g.drawString("Dopuszcz. pręd. spadania: " + Map.maxSpeed, 600, 60);
+		g.drawString("Twój wynik to " + Player.getPoints() + " pkt", 600, 80);
+		g.drawString("Grawitacja: " +Map.gravitation*1000, 600, 100);
 
 	}
 

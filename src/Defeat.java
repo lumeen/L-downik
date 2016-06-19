@@ -65,6 +65,8 @@ public class Defeat extends GameState {
 	@Override
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_M)
+			Board.lvl=1;
+		Player.points=0;
 			GameState.menager.states.push(new Menu(GameState.menager));
 
 	}

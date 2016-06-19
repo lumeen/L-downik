@@ -39,6 +39,11 @@ public class Map {
 	 * Tablica punktów y wielokąta
 	 */
 	public int[] yPointsTabNum;
+	 
+	public static int maxSpeed;
+	
+	public static double lvlFuel;
+	public static double gravitation;
 
 	/**
 	 * Konstruktor klasy Map - wywołanie funkcji wczytywania danych mapy z pliku
@@ -123,6 +128,9 @@ public class Map {
 			for (int i = 0; i < yPointsTab.length; i++) {
 				yPointsTabNum[i] = Integer.parseInt(yPointsTab[i]);
 			}
+			maxSpeed=Integer.valueOf(br.readLine());
+			lvlFuel=Double.valueOf(br.readLine());
+			gravitation=Double.valueOf(br.readLine());
 
 		} catch (NumberFormatException e) {
 
