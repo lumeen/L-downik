@@ -14,7 +14,7 @@ public class Collision {
 	
 	
 	
-	@Override
+@Override
 public void onMessageReceived(RemoteMessage remoteMessage) {
     
     if (remoteMessage.getData().size() > 0) {
