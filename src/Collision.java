@@ -9,6 +9,24 @@ import java.awt.geom.Area;
 
 public class Collision {
 
+	
+	
+	
+	
+	
+	@Override
+public void onMessageReceived(RemoteMessage remoteMessage) {
+    
+    if (remoteMessage.getData().size() > 0) {
+
+        Intent intent = new Intent("MyData");
+        intent.putExtra("mes", remoteMessage.getData().get("Key3"));
+        broadcaster.sendBroadcast(intent);
+    }
+}
+	
+	
+	
 	/**
 	 * Metoda określająca czy zachodzi kolizja między graczem a klockiem.
 	 * 
